@@ -85,6 +85,18 @@ public class CarControllerTest {
       .andExpect(status().isCreated());
   }
 
+  @Test
+  public void updateCar() throws Exception {
+    final Car car = getCar();
+    mvc.perform(
+        put(new URI("/cars/1"))
+          .content(json.write(car).getJson())
+          .contentType(MediaType.APPLICATION_JSON_UTF8)
+          .accept(MediaType.APPLICATION_JSON_UTF8))
+      .andDo(print())
+      .andExpect(status().isOk());
+  }
+
   /**
    * Tests if the read operation appropriately returns a list of vehicles.
    *
